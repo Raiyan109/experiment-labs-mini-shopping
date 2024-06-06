@@ -40,7 +40,7 @@ const Navbar = () => {
                                 <NavLink to='/' className={({ isActive }) => (isActive ? activeLink : 'font-normal text-black flex items-center px-4 -mb-1')}>Home</NavLink>
                             </li>
                             <li className="flex">
-                                <NavLink to='/products' className={({ isActive }) => (isActive ? activeLink : 'font-normal text-black flex items-center px-4 -mb-1')}>Products</NavLink>
+                                <NavLink to='/allProducts' className={({ isActive }) => (isActive ? activeLink : 'font-normal text-black flex items-center px-4 -mb-1')}>Products</NavLink>
                             </li>
 
                         </ul>
@@ -77,7 +77,7 @@ const Navbar = () => {
                                 <Link to='/' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Home</Link>
                             </li>
                             <li>
-                                <Link to='/products' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-blue-600 border-blue-600">Products</Link>
+                                <Link to='/allProducts' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-blue-600 border-blue-600">Products</Link>
                             </li>
                             <li>
                                 <Link to='/cart' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">

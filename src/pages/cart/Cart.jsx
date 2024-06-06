@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar";
 import axios from "axios";
 import CartItem from "./CartItem";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, setCart] = useState([])
@@ -41,6 +42,7 @@ const Cart = () => {
         <>
             <Navbar />
             <section className="py-24 relative">
+                <Link to='/allProducts' className="bg-primary rounded-md py-2 w-36 text-sm absolute top-0 left-5 flex justify-center items-center font-semibold">Continue shopping</Link>
                 <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
 
                     <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Shopping Cart
