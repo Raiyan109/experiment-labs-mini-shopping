@@ -5,6 +5,7 @@ import SignUp from "../pages/SignUp";
 import ForgotPassword from "../pages/ForgotPassword";
 import Products from "../pages/products/Products";
 import AllProducts from "../pages/products/AllProducts";
+import Cart from "../pages/cart/Cart";
 
 const routes = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
     {
         path: '/allProducts',
         element: <AllProducts />
+    },
+    {
+        path: '/cart',
+        element: <Cart />
     },
     {
         path: '/login',

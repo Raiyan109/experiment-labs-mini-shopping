@@ -1,12 +1,26 @@
-import { BiSearch } from 'react-icons/bi'
 import { CiShoppingCart } from "react-icons/ci";
 import { BsFillPersonFill } from 'react-icons/bs'
 import { BiMenuAltRight } from "react-icons/bi";
 
-import { Link, NavLink } from 'react-router-dom'
-import { useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { useContext, useState } from 'react';
+import { AuthContext } from "../context/AuthContext";
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { mernAuth, setMernAuth } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const logout = () => {
+        // signOut(auth);
+        setMernAuth({
+            ...mernAuth,
+            user: null,
+            token: ''
+        })
+        localStorage.removeItem('userId')
+        localStorage.removeItem('auth')
+        navigate('/login')
+    };
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -44,7 +58,9 @@ const Navbar = () => {
                                     <BsFillPersonFill />
                                 </Link>
                             </li>
-
+                            <li>{mernAuth.user ? <button className="inline-flex mt-2 border-0 py-2 px-6 focus:outline-none rounded text-lg" onClick={logout}>Sign out</button> : <button className='inline-flex text-primary btn btn-secondary border-0 py-2 mt-2 px-6 focus:outline-none hover:bg-primary hover:text-secondary rounded text-lg font-OpenSans'>
+                                <NavLink to='/login'>Login</NavLink>
+                            </button>}</li>
                         </ul>
                     </div>
                     {/* <div className="items-center flex-shrink-0 hidden lg:flex">
