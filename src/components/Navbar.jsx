@@ -1,30 +1,81 @@
 import { BiSearch } from 'react-icons/bi'
-import { GiHamburgerMenu } from 'react-icons/gi'
+import { CiShoppingCart } from "react-icons/ci";
 import { BsFillPersonFill } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { BiMenuAltRight } from "react-icons/bi";
+
+import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react';
 const Navbar = () => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const activeLink = 'text-primary font-bold flex items-center px-4 -mb-1'
     return (
         <div>
-            <header className="text-gray-600 body-font">
-                <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-                    <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                        </svg> */}
-                        <span className="ml-3 text-xl">AirBnb</span>
-                    </a>
-                    <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                        <a className="mr-5 hover:text-gray-900">Any where</a>
-                        <a className="mr-5 hover:text-gray-900">Any week</a>
-                        <a className="mr-5 hover:text-gray-900">Add guest</a>
-                        <div><BiSearch /></div>
+            <header className="p-4">
+                <div className="container flex justify-between h-16 mx-auto">
+                    <div className="flex gap-10">
+                        <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-center p-2 font-anton text-xl">
+                            DecorMind
+                        </a>
+                        <ul className="items-stretch hidden space-x-3 lg:flex text-lg">
+                            <li className="flex">
+                                <NavLink to='/' className={({ isActive }) => (isActive ? activeLink : 'font-normal text-black flex items-center px-4 -mb-1')}>Home</NavLink>
+                            </li>
+                            <li className="flex">
+                                <NavLink to='/products' className={({ isActive }) => (isActive ? activeLink : 'font-normal text-black flex items-center px-4 -mb-1')}>Products</NavLink>
+                            </li>
 
-                    </nav>
-                    <div className='flex justify-center items-center gap-2 border-gray-200 shadow-md p-3 rounded-xl'>
-                        <div><GiHamburgerMenu /></div>
-                        <Link to='/login'><BsFillPersonFill /></Link>
+                        </ul>
                     </div>
+                    <div className="gap-10  hidden lg:flex">
+
+                        <ul className="items-stretch hidden space-x-3 lg:flex text-2xl">
+                            <li className="flex">
+                                <Link to='/' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">
+                                    <CiShoppingCart />
+                                </Link>
+                            </li>
+                            <li className="flex">
+                                <Link to='/signUp' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-primary border-blue-600">
+                                    <BsFillPersonFill />
+                                </Link>
+                            </li>
+
+                        </ul>
+                    </div>
+                    {/* <div className="items-center flex-shrink-0 hidden lg:flex">
+                        <button className="px-8 py-3 font-semibold rounded bg-blue-600 text-gray-50">Log in</button>
+                    </div> */}
+                    <button className="p-4 lg:hidden" onClick={toggleMobileMenu}>
+                        <BiMenuAltRight size={24} />
+                    </button>
                 </div>
+                {isMobileMenuOpen && (
+                    <div className="lg:hidden">
+                        <ul className="flex flex-col items-center space-y-3 mt-4">
+                            <li>
+                                <Link to='/' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Home</Link>
+                            </li>
+                            <li>
+                                <Link to='/products' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-blue-600 border-blue-600">Products</Link>
+                            </li>
+                            <li>
+                                <Link to='/cart' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">
+                                    <CiShoppingCart />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/signUp' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-blue-600 border-blue-600">
+                                    <BsFillPersonFill />
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                )}
             </header>
         </div>
     );
