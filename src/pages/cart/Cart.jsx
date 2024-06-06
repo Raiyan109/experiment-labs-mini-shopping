@@ -11,18 +11,32 @@ const Cart = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get('http://localhost:5000/api/cart', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${mernAuth?.token}`
+            try {
+                const res = await axios.get('http://localhost:5000/api/cart', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${mernAuth?.token}`
+                    }
+                })
+                console.log(res.data);
+                if (res.data) {
+                    setTotal(res.data.total);
+                    setCart(res.data.products);
+                } else {
+                    setTotal(0);
+                    setCart([]);
                 }
-            })
-            console.log(res.data);
-            setTotal(res.data.total)
-            setCart(res.data.products)
+            } catch (error) {
+                if (error.response && error.response.status === 401) {
+                    console.error("Authentication failed!", error.response.data.message);
+                    // Handle 401 error (e.g., redirect to login page)
+                } else {
+                    console.error("Error fetching cart", error);
+                }
+            }
         })()
-    }, [])
-    console.log(cart);
+    }, [mernAuth?.token])
+
     return (
         <>
             <Navbar />
@@ -33,7 +47,7 @@ const Cart = () => {
                     </h2>
                     <div className="flex flex-col gap-9">
                         {
-                            cart.map((item) => (
+                            cart?.length > 0 && cart?.map((item) => (
                                 <CartItem item={item} key={item._id} />
                             ))
                         }
