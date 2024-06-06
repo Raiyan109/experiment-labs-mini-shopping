@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import logo from '../assets/react.svg'
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 
