@@ -1,12 +1,36 @@
-import { Link } from "react-router-dom";
-import logo from '../assets/react.svg'
-import { useState } from "react";
+
+import { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const handleSubmit = () => {
+    const { mernAuth, setMernAuth } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        // setLoading(true);
+        const res = await axios.post('http://localhost:5000/api/users/signin', {
+            email,
+            password,
+        })
+
+        // setLoading(false);
+        navigate('/')
+        const data = await res.data
+        // console.log(data);
+        setMernAuth({
+            ...mernAuth,
+            user: data.user,
+            token: data.access_token
+        })
+        localStorage.setItem('userId', data.user._id)
+        localStorage.setItem('auth', JSON.stringify(res.data))
+        return data
 
     }
     return (

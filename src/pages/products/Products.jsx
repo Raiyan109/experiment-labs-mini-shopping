@@ -13,7 +13,6 @@ const Products = () => {
             setProducts(res.data.data)
         })()
     }, [])
-    console.log(products);
     return (
         <div className="pt-20">
             <h1 className="text-center font-anton text-4xl pb-10">Products</h1>
