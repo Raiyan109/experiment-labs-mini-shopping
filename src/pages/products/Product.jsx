@@ -1,11 +1,15 @@
 /* eslint-disable react/prop-types */
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 const Product = ({ product }) => {
     const { mernAuth } = useContext(AuthContext)
+    const MySwal = withReactContent(Swal)
+    const navigate = useNavigate()
 
     const handleSubmit = async (id) => {
         console.log(id);
@@ -19,9 +23,14 @@ const Product = ({ product }) => {
                     "Authorization": `Bearer ${mernAuth?.token}`
                 }
             })
-            console.log(res.data); // Log the entire response data to inspect it
+
             const data = res.data;
-            console.log("Cart updated:", data);
+            MySwal.fire({
+                title: "Product added to cart",
+                text: "Redirecting to Cart page",
+                icon: "success"
+            })
+            navigate('/cart')
 
             return data
         } catch (error) {

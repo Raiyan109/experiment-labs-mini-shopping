@@ -32,9 +32,9 @@ const Navbar = () => {
             <header className="p-4">
                 <div className="container flex justify-between h-16 mx-auto">
                     <div className="flex gap-10">
-                        <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-center p-2 font-anton text-xl">
+                        <Link to='/' className="flex items-center p-2 font-anton text-xl">
                             DecorMind
-                        </a>
+                        </Link>
                         <ul className="items-stretch hidden space-x-3 lg:flex text-lg">
                             <li className="flex">
                                 <NavLink to='/' className={({ isActive }) => (isActive ? activeLink : 'font-normal text-black flex items-center px-4 -mb-1')}>Home</NavLink>
