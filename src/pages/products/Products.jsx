@@ -2,17 +2,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Product from "./Product";
 import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const Products = () => {
     const [products, setProducts] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         (async () => {
+            setIsLoading(true)
             const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/products')
             // console.log(res);
             setProducts(res.data.data)
+            setIsLoading(false)
         })()
     }, [])
+
+    if (isLoading) {
+        return <Loading />
+    }
+
     return (
         <div className="pt-20">
             <h1 className="text-center font-anton text-4xl pb-10">Products</h1>

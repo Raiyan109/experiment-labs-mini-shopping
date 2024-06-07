@@ -3,9 +3,20 @@ import Navbar from "../../components/Navbar";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
+import Loading from "../../components/Loading";
 
 const Cart = () => {
-    const { cart, cartTotal } = useContext(CartContext)
+    const { cart, cartTotal, isLoading } = useContext(CartContext)
+
+    if (isLoading) {
+        return <div>
+            <Navbar />
+            <section className=" relative">
+                <Link to='/allProducts' className="bg-primary rounded-md py-2 w-36 text-sm absolute top-0 left-5 lg:left-10 xl:left-80 flex justify-center items-center font-semibold">Continue shopping</Link>
+            </section>
+            <Loading />
+        </div>
+    }
 
     return (
         <>

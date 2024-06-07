@@ -2,18 +2,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import AllProduct from "./AllProduct";
+import Loading from "../../components/Loading";
 
 const AllProducts = () => {
     const [products, setProducts] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() => {
         (async () => {
+            setIsLoading(true)
             const res = await axios.get(`https://experiment-labs-mini-shopping-be.vercel.app/api/products?searchTerm=${searchTerm}`)
             // console.log(res);
             setProducts(res.data.data)
+            setIsLoading(false)
         })()
     }, [searchTerm])
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <div className="">

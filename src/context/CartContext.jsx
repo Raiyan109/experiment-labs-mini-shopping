@@ -8,11 +8,13 @@ export const CartContext = createContext()
 export const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [cartTotal, setCartTotal] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     const { mernAuth } = useContext(AuthContext)
 
     useEffect(() => {
         (async () => {
             try {
+                setIsLoading(true)
                 const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/cart', {
                     headers: {
                         'Content-Type': 'application/json',
@@ -23,6 +25,7 @@ export const CartContextProvider = ({ children }) => {
                 if (res.data) {
                     setCartTotal(res.data.total);
                     setCart(res.data.products);
+                    setIsLoading(false)
                 } else {
                     setCartTotal(0);
                     setCart([]);
@@ -40,7 +43,8 @@ export const CartContextProvider = ({ children }) => {
 
     const value = {
         cart,
-        cartTotal
+        cartTotal,
+        isLoading
     }
     return (
         <CartContext.Provider value={value}>

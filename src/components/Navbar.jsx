@@ -52,7 +52,7 @@ const Navbar = () => {
 
                         <ul className="items-stretch hidden space-x-3 lg:flex text-2xl">
                             <li className="flex">
-                                <Link to='/' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-3xl relative">
+                                <Link to='/cart' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-3xl relative">
                                     <div className="absolute top-4 right-3 bg-red-600 px-1 rounded-full text-xs text-white">
                                         {cart.length}
                                     </div>
