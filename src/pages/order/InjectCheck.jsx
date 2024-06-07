@@ -1,8 +1,7 @@
 import { ElementsConsumer } from '@stripe/react-stripe-js';
-import Checkoutform2 from './Checkoutform2';
 import CheckoutForm from './CheckoutForm';
 
-const InjectCheck = ({ clientSecret }) => {
+const InjectCheck = () => {
     return (
         <div>
             <ElementsConsumer>

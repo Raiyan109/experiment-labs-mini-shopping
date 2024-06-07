@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Product from "./Product";
 import Navbar from "../../components/Navbar";
+import AllProduct from "./AllProduct";
 
 const AllProducts = () => {
     const [products, setProducts] = useState([])
@@ -14,7 +14,7 @@ const AllProducts = () => {
             setProducts(res.data.data)
         })()
     }, [searchTerm])
-    console.log(searchTerm);
+
     return (
         <div className="">
             <Navbar />
@@ -37,7 +37,7 @@ const AllProducts = () => {
 
                     {
                         products.map((product) => (
-                            <Product product={product} key={product._id} />
+                            <AllProduct product={product} key={product._id} />
                         ))
                     }
                 </div>

@@ -5,34 +5,29 @@ import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
 import InjectCheck from "./InjectCheck";
+import { CartContext } from "../../context/CartContext";
 
-const stripeId = loadStripe('pk_test_51L1OriC6jSgZhdi8qkAiIGespYE6i96T7HuAWIKypgpRFOCfOhhRlqNPTLmInenVmKn5srcAjElwfRYf0oUEUT5E00NRA1jfwh')
 const Payment = () => {
-    // const [stripePromise, setStripePromise] = useState(null);
+    const [stripePromise, setStripePromise] = useState(null);
     const [clientSec, setClientSec] = useState("");
-    // const stripe = useStripe();
-    // const elements = useElements();
-
+    const { cartTotal } = useContext(CartContext)
     const { mernAuth } = useContext(AuthContext);
 
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/config')
-    //         setStripePromise(loadStripe(res.data.publishableKey));
-    //     })()
-    // }, [])
+    useEffect(() => {
+        (async () => {
+            const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/config')
+            setStripePromise(loadStripe(res.data.publishableKey));
+        })()
+    }, [])
 
     useEffect(() => {
 
         const createOrder = async () => {
             try {
-                // const { paymentMethod } = await stripe.createPaymentMethod({
-                //     type: 'card',
-                //     card: elements.getElement(CardElement),
-                // });
+
                 const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/createOrder', {
-                    amount: 100
+                    amount: cartTotal
                 }, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -61,9 +56,9 @@ const Payment = () => {
 
     return (
         <div>
-            <h1>React Stripe and the Payment Element</h1>
+            <h1 className="font-anton text-center text-5xl py-20">Payment</h1>
             {clientSec && (
-                <Elements stripe={stripeId} options={options}>
+                <Elements stripe={stripePromise} options={options}>
                     <InjectCheck />
                     {/* <InjectCheck clientSecret={clientSec} /> */}
                 </Elements>
