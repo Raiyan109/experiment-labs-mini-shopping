@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
@@ -75,7 +75,7 @@ const Login = () => {
                     <div className="flex items-center justify-center py-4 text-center bg-gray-50 dark:bg-gray-700">
                         <span className="text-sm text-gray-600 dark:text-gray-200">Do not have an account? </span>
 
-                        <a href="#" className="mx-2 text-sm font-bold text-black dark:text-blue-400 hover:underline">Register</a>
+                        <Link to='/signUp' className="mx-2 text-sm font-bold text-black dark:text-blue-400 hover:underline">Register</Link>
                     </div>
                 </div>
             </div>
