@@ -3,12 +3,12 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
 import InjectCheck from "./InjectCheck";
 
 const stripeId = loadStripe('pk_test_51L1OriC6jSgZhdi8qkAiIGespYE6i96T7HuAWIKypgpRFOCfOhhRlqNPTLmInenVmKn5srcAjElwfRYf0oUEUT5E00NRA1jfwh')
 const Payment = () => {
-    const [stripePromise, setStripePromise] = useState(null);
+    // const [stripePromise, setStripePromise] = useState(null);
     const [clientSec, setClientSec] = useState("");
     // const stripe = useStripe();
     // const elements = useElements();
@@ -18,7 +18,7 @@ const Payment = () => {
 
     // useEffect(() => {
     //     (async () => {
-    //         const res = await axios.get('http://localhost:5000/api/orders/config')
+    //         const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/config')
     //         setStripePromise(loadStripe(res.data.publishableKey));
     //     })()
     // }, [])
@@ -31,7 +31,7 @@ const Payment = () => {
                 //     type: 'card',
                 //     card: elements.getElement(CardElement),
                 // });
-                const res = await axios.post('http://localhost:5000/api/orders/createOrder', {
+                const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/createOrder', {
                     amount: 100
                 }, {
                     headers: {

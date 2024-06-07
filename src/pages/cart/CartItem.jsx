@@ -14,7 +14,7 @@ const CartItem = ({ item }) => {
     const handleSubmit = async (id) => {
         console.log(id);
         try {
-            const res = await axios.delete(`http://localhost:5000/api/cart/${id}`, {
+            const res = await axios.delete(`https://experiment-labs-mini-shopping-be.vercel.app/api/cart/${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     "Authorization": `Bearer ${mernAuth?.token}`

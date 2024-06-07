@@ -15,7 +15,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const res = await axios.post('http://localhost:5000/api/users/signup', {
+        const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/users/signup', {
             name,
             email,
             password,

@@ -8,7 +8,7 @@ const Products = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get('http://localhost:5000/api/products')
+            const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/products')
             // console.log(res);
             setProducts(res.data.data)
         })()

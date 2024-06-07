@@ -13,7 +13,7 @@ const AllProduct = ({ product }) => {
     const handleSubmit = async (id) => {
         console.log(id);
         try {
-            const res = await axios.post('http://localhost:5000/api/cart/addToCart', {
+            const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/cart/addToCart', {
                 productId: id,
                 quantity: 1,
             }, {
