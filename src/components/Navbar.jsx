@@ -89,6 +89,9 @@ const Navbar = () => {
                                     <BsFillPersonFill />
                                 </Link>
                             </li>
+                            <li>{mernAuth.user ? <button className="inline-flex mt-2 border-0 py-2 px-6 focus:outline-none bg-primary rounded text-lg" onClick={logout}>Sign out</button> : <button className='inline-flex text-primary btn btn-secondary border-0 py-2 mt-2 px-6 focus:outline-none hover:bg-primary hover:text-secondary rounded text-lg font-OpenSans'>
+                                <NavLink to='/login'>Login</NavLink>
+                            </button>}</li>
                         </ul>
                     </div>
                 )}

@@ -58,8 +58,8 @@ const Cart = () => {
                         <h5 className="text-gray-900 font-manrope font-semibold text-2xl leading-9 w-full mb-10">Subtotal</h5>
                         <h6 className="font-manrope font-bold text-3xl lead-10 text-primary">${total}</h6>
                     </div>
-                    <button
-                        className="rounded-full py-4 px-6 bg-primary text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 ">Checkout</button>
+                    <Link to='/payment'
+                        className="rounded-full py-4 px-6 bg-primary text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 ">Checkout</Link>
 
                 </div>
 

@@ -6,6 +6,8 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Products from "../pages/products/Products";
 import AllProducts from "../pages/products/AllProducts";
 import Cart from "../pages/cart/Cart";
+import Success from "../pages/order/Success";
+import Payment from "../pages/order/Payment";
 
 const routes = createBrowserRouter([
     {
@@ -23,6 +25,14 @@ const routes = createBrowserRouter([
     {
         path: '/cart',
         element: <Cart />
+    },
+    {
+        path: '/payment',
+        element: <Payment />
+    },
+    {
+        path: '/success',
+        element: <Success />
     },
     {
         path: '/login',
