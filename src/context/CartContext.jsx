@@ -45,7 +45,7 @@ export const CartContextProvider = ({ children }) => {
                 }
             }
         })()
-    }, [mernAuth?.token])
+    }, [mernAuth?.token, cart])
 
     const value = {
         cart,

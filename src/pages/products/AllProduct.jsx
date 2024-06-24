@@ -4,11 +4,11 @@ import withReactContent from 'sweetalert2-react-content'
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 const AllProduct = ({ product }) => {
     const { mernAuth } = useContext(AuthContext)
     const MySwal = withReactContent(Swal)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const AllProduct = ({ product }) => {
                 icon: "success"
             });
             setCartItems([...cartItems, id]); // Add item to cartItems state
-            navigate('/cart');
+            // navigate('/cart');
 
             return data;
         } catch (error) {
