@@ -15,18 +15,18 @@ export const CartContextProvider = ({ children }) => {
         (async () => {
             try {
                 setIsLoading(true)
-                // const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/cart', {
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         "Authorization": `Bearer ${mernAuth?.token}`
-                //     }
-                // })
-                const res = await axios.get('http://localhost:5000/api/cart', {
+                const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/cart', {
                     headers: {
                         'Content-Type': 'application/json',
                         "Authorization": `Bearer ${mernAuth?.token}`
                     }
                 })
+                // const res = await axios.get('http://localhost:5000/api/cart', {
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         "Authorization": `Bearer ${mernAuth?.token}`
+                //     }
+                // })
                 console.log(res.data);
                 if (res.data) {
                     setCartTotal(res.data.total);
