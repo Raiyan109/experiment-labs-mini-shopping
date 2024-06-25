@@ -5,11 +5,11 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react';
 import { AuthContext } from "../context/AuthContext";
-import { CartContext } from "../context/CartContext";
+import { useCart } from "../context/CartContext";
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { mernAuth, setMernAuth } = useContext(AuthContext)
-    const { cart } = useContext(CartContext)
+    const { cart } = useCart()
 
     const navigate = useNavigate()
 

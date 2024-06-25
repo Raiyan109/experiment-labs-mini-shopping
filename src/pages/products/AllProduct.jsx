@@ -1,61 +1,27 @@
 /* eslint-disable react/prop-types */
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
+import { useCart } from '../../context/CartContext';
 // import { useNavigate } from 'react-router-dom';
 const AllProduct = ({ product }) => {
-    const { mernAuth } = useContext(AuthContext)
     const MySwal = withReactContent(Swal)
     // const navigate = useNavigate()
+    const { cart, addToCart } = useCart();
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
-        // Fetch cart items on mount
-        const fetchCartItems = async () => {
-            try {
-                const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/cart', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        "Authorization": `Bearer ${mernAuth?.token}`
-                    }
-                });
-
-                setCartItems(res.data.products.map(product => product.productId));
-            } catch (error) {
-                console.error("Error fetching cart items", error);
-            }
-        };
-        fetchCartItems();
-    }, [mernAuth?.token]);
+        setCartItems(cart.map(item => item.productId));
+    }, [cart]);
 
     const handleSubmit = async (id) => {
         console.log(id);
-        try {
-            const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/cart/addToCart', {
-                productId: id,
-                quantity: 1,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${mernAuth?.token}`
-                }
-            });
-
-            const data = res.data;
-            MySwal.fire({
-                title: "Product added to cart",
-                text: "Redirecting to Cart page",
-                icon: "success"
-            });
-            setCartItems([...cartItems, id]); // Add item to cartItems state
-            // navigate('/cart');
-
-            return data;
-        } catch (error) {
-            console.error("Error adding to cart", error);
-        }
+        await addToCart(id, 1);
+        MySwal.fire({
+            title: "Product added to cart",
+            text: "Redirecting to Cart page",
+            icon: "success"
+        });
     };
 
     const isAddedToCart = cartItems.includes(product._id);

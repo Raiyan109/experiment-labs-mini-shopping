@@ -8,49 +8,56 @@ export const CartContext = createContext()
 export const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [cartTotal, setCartTotal] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false)
     const { mernAuth } = useContext(AuthContext)
 
     useEffect(() => {
-        (async () => {
+        const fetchCart = async () => {
             try {
-                setIsLoading(true)
                 const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/cart', {
                     headers: {
                         'Content-Type': 'application/json',
                         "Authorization": `Bearer ${mernAuth?.token}`
                     }
-                })
-                // const res = await axios.get('http://localhost:5000/api/cart', {
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         "Authorization": `Bearer ${mernAuth?.token}`
-                //     }
-                // })
-                console.log(res.data);
+                });
                 if (res.data) {
                     setCartTotal(res.data.total);
                     setCart(res.data.products);
-                    setIsLoading(false)
                 } else {
                     setCartTotal(0);
                     setCart([]);
                 }
             } catch (error) {
-                if (error.response && error.response.status === 401) {
-                    console.error("Authentication failed!", error.response.data.message);
-                    // Handle 401 error (e.g., redirect to login page)
-                } else {
-                    console.error("Error fetching cart", error);
-                }
+                console.error("Error fetching cart", error);
             }
-        })()
-    }, [mernAuth?.token, cart])
+        };
+
+        fetchCart();
+    }, [mernAuth?.token]);
+
+    const addToCart = async (productId, quantity = 1) => {
+        try {
+            const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/cart/addToCart', {
+                productId,
+                quantity,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${mernAuth?.token}`
+                }
+            });
+
+            setCart(res.data.products);
+            setCartTotal(res.data.total);
+        } catch (error) {
+            console.error("Error adding to cart", error);
+        }
+    };
 
     const value = {
         cart,
         cartTotal,
-        isLoading
+        addToCart
     }
     return (
         <CartContext.Provider value={value}>
