@@ -34,12 +34,25 @@ const Cart = () => {
                             ))
                         }
                     </div>
-                    <div className="flex justify-between items-center">
-                        <h5 className="text-gray-900 font-manrope font-semibold text-2xl leading-9 w-full mb-10">Subtotal</h5>
-                        <h6 className="font-manrope font-bold text-3xl lead-10 text-primary">${cartTotal}</h6>
-                    </div>
-                    <Link to='/payment'
-                        className="rounded-full py-4 px-6 bg-primary text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 ">Checkout</Link>
+                    {
+                        cart?.length > 0 && (
+                            <div className="flex justify-between items-center">
+                                <h5 className="text-gray-900 font-manrope font-semibold text-2xl leading-9 w-full mb-10">Subtotal</h5>
+                                <h6 className="font-manrope font-bold text-3xl lead-10 text-primary">${Math.round(cartTotal)}</h6>
+                            </div>
+                        )
+                    }
+                    {
+                        cart?.length > 0 ? (
+                            <Link to='/payment'
+                                className="rounded-full py-4 px-6 bg-primary text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 ">Checkout</Link>
+                        ) :
+                            (
+                                <div>
+                                    <h1 className="text-center text-2xl pt-5 text-gray-600">No Items to Checkout.</h1>
+                                </div>
+                            )
+                    }
 
                 </div>
 

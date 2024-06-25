@@ -54,10 +54,47 @@ export const CartContextProvider = ({ children }) => {
         }
     };
 
+    const updateCartItemQuantity = async (id, quantity) => {
+        try {
+            const res = await axios.put(`https://experiment-labs-mini-shopping-be.vercel.app/api/cart/${id}`, {
+                quantity,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${mernAuth?.token}`
+                }
+            });
+
+            setCart(res.data.products);
+            setCartTotal(res.data.total);
+        } catch (error) {
+            console.error("Error updating cart item quantity", error);
+        }
+    };
+
+    const removeFromCart = async (productId) => {
+        try {
+            const res = await axios.delete(`https://experiment-labs-mini-shopping-be.vercel.app/api/cart/${productId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${mernAuth?.token}`
+                }
+            });
+
+            setCart(res.data.products);
+            setCartTotal(res.data.total);
+        } catch (error) {
+            console.error("Error removing from cart", error);
+        }
+    };
+
+
     const value = {
         cart,
         cartTotal,
-        addToCart
+        addToCart,
+        removeFromCart,
+        updateCartItemQuantity
     }
     return (
         <CartContext.Provider value={value}>
