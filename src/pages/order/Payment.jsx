@@ -13,7 +13,7 @@ const Payment = () => {
     const { cartTotal } = useContext(CartContext)
     const { mernAuth } = useContext(AuthContext);
 
-
+    // GET stripe publishable key from backend
     useEffect(() => {
         (async () => {
             const res = await axios.get('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/config')
@@ -21,12 +21,11 @@ const Payment = () => {
         })()
     }, [])
 
+
     useEffect(() => {
-
-        const createOrder = async () => {
+        const createStripe = async () => {
             try {
-
-                const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/createOrder', {
+                const res = await axios.post('https://experiment-labs-mini-shopping-be.vercel.app/api/orders/createStripe', {
                     amount: cartTotal
                 }, {
                     headers: {
@@ -42,7 +41,7 @@ const Payment = () => {
         };
 
         if (mernAuth?.token) {
-            createOrder();
+            createStripe();
         }
     }, [])
     console.log(clientSec);
