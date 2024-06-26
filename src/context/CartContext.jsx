@@ -91,6 +91,7 @@ export const CartContextProvider = ({ children }) => {
 
     const value = {
         cart,
+        setCart,
         cartTotal,
         addToCart,
         removeFromCart,

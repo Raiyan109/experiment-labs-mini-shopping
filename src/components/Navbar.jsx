@@ -9,6 +9,7 @@ import { useCart } from "../context/CartContext";
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { mernAuth, setMernAuth } = useContext(AuthContext)
+    console.log(mernAuth?.user?.name);
     const { cart } = useCart()
 
     const navigate = useNavigate()
@@ -61,7 +62,7 @@ const Navbar = () => {
                             </li>
                             <li className="flex">
                                 <Link to='/signUp' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-primary border-blue-600 text-2xl">
-                                    <BsPerson />
+                                    <BsPerson title={mernAuth?.user?.name} />
                                 </Link>
                             </li>
                             <li>{mernAuth.user ? <button className="inline-flex mt-2 border-0 py-2 px-6 focus:outline-none rounded text-lg bg-primary" onClick={logout}>Sign out</button> : <button className='inline-flex text-primary btn btn-secondary border-0 py-2 mt-2 px-6 focus:outline-none hover:bg-primary hover:text-secondary rounded text-lg font-OpenSans'>
@@ -95,7 +96,7 @@ const Navbar = () => {
                             </li>
                             <li className="flex">
                                 <Link to='/signUp' className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-primary border-blue-600 text-2xl">
-                                    <BsPerson />
+                                    <BsPerson title={mernAuth?.user?.name} />
                                 </Link>
                             </li>
                             <li>{mernAuth.user ? <button className="inline-flex mt-2 border-0 py-2 px-6 focus:outline-none bg-primary rounded text-lg" onClick={logout}>Sign out</button> : <button className='inline-flex text-primary btn btn-secondary border-0 py-2 mt-2 px-6 focus:outline-none hover:bg-primary hover:text-secondary rounded text-lg font-OpenSans'>
